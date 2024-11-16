@@ -1,0 +1,41 @@
+body{
+    background-color: #2c3e50;
+}
+
+.canvas{
+    width: 100%;
+    margin-top: 15%;
+}
+
+.playBtn {
+    color: #ecf0f1;
+    background:  #3498db 90%; 
+    margin-top: 40px;
+    border-radius: 10px;
+    height: 80px;
+    width: 300px;
+    border: 0;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease; /* Suavidade na transição */
+}
+
+/* Efeito Hover */
+.playBtn:hover {
+    background:#2980b9 ; /* Gradiente escuro */
+    transform: scale(1.05); /* Pequeno aumento no botão */
+}
+
+/* Efeito de Ativação (Clique) */
+.playBtn:active {
+    background: #1e5375 90%; /* Gradiente mais escuro */
+    transform: scale(0.95); /* Pequeno "afundamento" no botão */
+}
+
+.title{
+    color: #ecf0f1;
+    font-size: 100px;
+    line-height: 80%;
+}
+
