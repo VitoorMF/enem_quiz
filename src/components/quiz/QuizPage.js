@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../quiz/QuizPage.css';
+import { useNavigate } from 'react-router-dom';
 
 function QuizPage() {
     const [question, setQuestion] = useState(null); // Para armazenar a questão
@@ -9,15 +10,21 @@ function QuizPage() {
     const [loading, setLoading] = useState(false); // Estado para carregamento
     const [isModalOpen, setIsModalOpen] = useState(false); // Controle do modal
 
+    const navigate = useNavigate();
+
+    const goToHomePage = () => {
+        navigate('/');
+    };
+
     // Função para lidar com a mudança na seleção
     const handleAnswerChange = (event) => {
         setSelectedAnswer(event.target.value); // Atualiza a resposta selecionada
         // Verifica a resposta imediatamente após a seleção
         const selectedAlternative = event.target.value;
         if (selectedAlternative === question.correctAlternative) {
-            setFeedback('Correto! 🎉');
+            setFeedback(<p>Boaa!!<br/> Você acertou 🎉🎉</p>);
         } else {
-            setFeedback('Voce errou. 😔 ');
+            setFeedback(<p>Que pena!!<br/>Você errou. 😔</p>);
         }
         setIsModalOpen(true); // Abre o modal com o feedback
     };
@@ -58,13 +65,13 @@ function QuizPage() {
         <div className='questionModule'>
             {/* Exibe mensagem de carregamento */}
             {loading && <p>Carregando questão...</p>}
-    
+
             {/* Exibe questão se disponível */}
             {showQuestion && question && (
                 <div className='question'>
                     <h2>{question.title}</h2>
                     <p>{question.context}</p>
-    
+
                     {/* Exibe imagem da questão, se disponível */}
                     {question.files && question.files.length > 0 && (
                         <img
@@ -73,14 +80,14 @@ function QuizPage() {
                             style={{ maxWidth: '1000px', height: 'auto' }}
                         />
                     )}
-    
+
                     <p className='alternativesIntroduction'>{question.alternativesIntroduction}</p>
-    
+
                     <form>
                         {question.alternatives.map((alt) => {
                             const isSelected = selectedAnswer === alt.letter; // Verifica se a alternativa foi selecionada
                             const buttonClass = isSelected ? (alt.isCorrect ? 'correct' : 'incorrect') : ''; // Aplica a classe de cor baseada na resposta
-    
+
                             return (
                                 <div key={alt.letter} className="inpete">
                                     <input
@@ -109,7 +116,12 @@ function QuizPage() {
                 <div className="modal">
                     <div className="modal-content">
                         <p>{feedback}</p>
-                        
+                        <button onClick={goToHomePage} className="homeBtn">
+                            <img src="/home.png" 
+                            alt="Home"
+                            style={{ maxWidth: '40px', height: 'auto' }} />
+                            
+                        </button>
                     </div>
                 </div>
             )}
